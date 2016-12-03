@@ -21,7 +21,7 @@ gold_labels = gold_raw_data['Match?']
 #This is our feature vector table
 #Another input into our Learning Algs.
 #We add feature vectors from with in the for
-#loop that iterates over the DataFrame 
+#loop that iterates over the DataFrame
 feature_vector_table = []
 
 for index, row in gold_raw_data.iterrows():
@@ -29,10 +29,10 @@ for index, row in gold_raw_data.iterrows():
 
     #initialize the feature vector
     feature_vector = []
- 
+
     #Do all necessary work to build the feature vector
 
-    #price 
+    #price
     priceData = row['eastPrice']
     if priceData  < 2005:
     	price = 1
@@ -42,6 +42,23 @@ for index, row in gold_raw_data.iterrows():
         price = .5
     else:
         price = 0
+
+        #odometer feature vector building
+        east_od = row['Eastodometer']
+        west_od = row['Westodometer']
+        abs_diff = abs(east_od - west_od)
+        odom_feat = 1
+        if 0 <= abs_diff < 15936:
+            odom_feat = 1
+        elif 15936 <= abs_diff < 36177:
+            odom_feat = .75
+        elif 36177 <= abs_diff < 66189:
+            odom_feat = .5
+        else:
+            odom_feat = 0
+        feature_vector.append(odom_feat)
+
+
 
     #Add feature vector to the feature vector table
     feature_vector_table.append(feature_vector)
