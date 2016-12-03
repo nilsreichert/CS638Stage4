@@ -29,8 +29,19 @@ for index, row in gold_raw_data.iterrows():
 
     #initialize the feature vector
     feature_vector = []
-
+ 
     #Do all necessary work to build the feature vector
+
+    #price 
+    priceData = row['eastPrice']
+    if priceData  < 2005:
+    	price = 1
+    elif priceData < 5000:
+    	price =.75
+    elif priceDataq < 9905:
+        price = .5
+    else:
+        price = 0
 
     #Add feature vector to the feature vector table
     feature_vector_table.append(feature_vector)
