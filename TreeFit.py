@@ -1,5 +1,7 @@
 import py_stringmatching as sm
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn import tree
 from py_stringmatching import utils
 #incomplete list of necessary imports
 #we will need to import the necessary scikit learn packages when we get there
@@ -70,7 +72,7 @@ for index, row in gold_raw_data.iterrows():
     	price = 1
     elif priceData < 5000:
     	price =.75
-    elif priceDataq < 9905:
+    elif priceData < 9905:
         price = .5
     else:
         price = 0
@@ -107,14 +109,14 @@ for index, row in gold_raw_data.iterrows():
     feature_vector.append(color)
 
     #fuel
-    if row['Eastfuel'] == row['WestFuel']:
+    if row['Eastfuel'] == row['Westfuel']:
     	fuel = 1
     else:
     	fuel = 0
     feature_vector.append(fuel)
 
     #cylinders
-    if row['Eastylinders'] == row['westcylinders']:
+    if row['Eastcylinders'] == row['Westcylinders']:
     	cyl = 1
     else:
         cyl = 0
@@ -124,3 +126,14 @@ for index, row in gold_raw_data.iterrows():
     feature_vector_table.append(feature_vector)
 
 #Run Tree Algs using feature_vector_table and gold_labels
+
+Data_Train, Data_Test, Gold_Train, Gold_Tests = train_test_split(feature_vector_table, gold_labels, test_size=0.25, random_state=0)
+
+#initialize our decision tree
+decision_tree = tree.DecisionTreeClassifier()
+dtree = decision_tree.fit(Data_Train, Gold_Train)
+score = dtree.score(Data_Test, Gold_Tests)
+
+print(score)
+
+
