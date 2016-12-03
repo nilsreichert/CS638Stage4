@@ -32,10 +32,6 @@ for index, row in gold_raw_data.iterrows():
 
     #Do all necessary work to build the feature vector
 
-<<<<<<< HEAD
-    #price
-    priceData = row['eastPrice']
-=======
     #price
     priceData = abs(row['Eastprice'] - row['Westprice'])
     if priceData  < 2005:
@@ -46,6 +42,7 @@ for index, row in gold_raw_data.iterrows():
         price = .5
     else:
         price = 0
+    feature_vector.append(price)
 
     #odometer feature vector building
     east_od = row['Eastodometer']
@@ -62,34 +59,34 @@ for index, row in gold_raw_data.iterrows():
         odom_feat = 0
     feature_vector.append(odom_feat)
 
-
-
-
     #color
 
     if row['Eastpaint_color'] == row['Westpaint_color']:
     	color = 1
     else:
         color = 0
-
+    feature_vector.append(color)
 
     #size
     if row['Eastsize'] == row ['Westsize']:
     	size = 1
     else:
     	size = 0
+    feature_vector.append(color)
 
     #fuel
     if row['Eastfuel'] == row['WestFuel']:
     	fuel = 1
     else:
     	fuel = 0
+    feature_vector.append(fuel)
 
     #cylinders
     if row['Eastylinders'] == row['westcylinders']:
     	cyl = 1
     else:
         cyl = 0
+    feature_vector.append(cyl)
 
     #Add feature vector to the feature vector table
     feature_vector_table.append(feature_vector)
