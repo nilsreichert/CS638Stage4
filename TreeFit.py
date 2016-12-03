@@ -33,7 +33,7 @@ for index, row in gold_raw_data.iterrows():
     #Do all necessary work to build the feature vector
 
     #price 
-    priceData = row['eastPrice']
+    priceData = abs(row['Eastprice'] - row['Westprice'])
     if priceData  < 2005:
     	price = 1
     elif priceData < 5000:
@@ -43,6 +43,33 @@ for index, row in gold_raw_data.iterrows():
     else:
         price = 0
 
+    
+    #color
+
+    if row['Eastpaint_color'] == row['Westpaint_color']:
+    	color = 1
+    else: 
+        color = 0
+    
+        
+    #size 
+    if row['Eastsize'] == row ['Westsize']:
+    	size = 1
+    else:
+    	size = 0
+
+    #fuel
+    if row['Eastfuel'] == row['WestFuel']:
+    	fuel = 1
+    else:
+    	fuel = 0
+
+    #cylinders 
+    if row['Eastylinders'] == row['westcylinders']:
+    	cyl = 1
+    else:
+        cyl = 0
+    
     #Add feature vector to the feature vector table
     feature_vector_table.append(feature_vector)
 
