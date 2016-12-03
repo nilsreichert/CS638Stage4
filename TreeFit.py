@@ -119,7 +119,6 @@ for index, row in gold_raw_data.iterrows():
     else:
         cyl = 0
     feature_vector.append(cyl)
->>>>>>> e1fc1d07dc47d7e00c2b832c3c9864f69e8e0b2d
 
     #Add feature vector to the feature vector table
     feature_vector_table.append(feature_vector)
