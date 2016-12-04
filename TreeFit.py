@@ -75,9 +75,9 @@ for index, row in gold_raw_data.iterrows():
     if priceData  < 2005:
         price = 1
     elif priceData < 5000:
-        price =.75
+        price =.66
     elif priceData < 9905:
-        price = .5
+        price = .33
     else:
         price = 0
     feature_vector.append(price)
@@ -90,9 +90,9 @@ for index, row in gold_raw_data.iterrows():
     if 0 <= abs_diff < 15936:
         odom_feat = 1
     elif 15936 <= abs_diff < 36177:
-        odom_feat = .75
+        odom_feat = .66
     elif 36177 <= abs_diff < 66189:
-        odom_feat = .5
+        odom_feat = .33
     else:
         odom_feat = 0
     feature_vector.append(odom_feat)
