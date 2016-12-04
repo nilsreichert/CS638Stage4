@@ -4,7 +4,10 @@ from sklearn.model_selection import train_test_split
 from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB
 from py_stringmatching import utils
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, classification_report, confusion_matrix
 #incomplete list of necessary imports
 #we will need to import the necessary scikit learn packages when we get there
 
@@ -133,22 +136,59 @@ for index, row in gold_raw_data.iterrows():
 Data_Train, Data_Test, Gold_Train, Gold_Tests = train_test_split(feature_vector_table, gold_labels, test_size=0.25, random_state=0)
 
 #initialize our decision tree
-decision_tree = tree.DecisionTreeClassifier()
-dtree = decision_tree.fit(Data_Train, Gold_Train)
-dtreescore = dtree.score(Data_Test, Gold_Tests)
+dtree = tree.DecisionTreeClassifier()
+dtree_fit = dtree.fit(Data_Train, Gold_Train)
+dtree_pred = dtree_fit.predict(Data_Test)
+print(f1_score(Gold_Tests, dtree_pred , average="macro"))
+print(precision_score(Gold_Tests, dtree_pred , average="macro"))
+print(recall_score(Gold_Tests, dtree_pred , average="macro"))  
+dtree_score = dtree_fit.score(Data_Test, Gold_Tests)
+print(dtree_score)
+print()
 
-print(dtreescore)
+
+rforrest = RandomForestClassifier()
+rforrest_fit = rforrest.fit(Data_Train, Gold_Train)
+rforrest_score = rforrest_fit.score(Data_Train, Gold_Train)
+rforrest_pred = rforrest_fit.predict(Data_Test)
+print(f1_score(Gold_Tests, rforrest_pred , average="macro"))
+print(precision_score(Gold_Tests, rforrest_pred , average="macro"))
+print(recall_score(Gold_Tests, rforrest_pred , average="macro"))  
+print(rforrest_score)
+print()
 
 
-rando_forrest = RandomForestClassifier()
-rforrest = rando_forrest.fit(Data_Train, Gold_Train)
-rforrestscore = rforrest.score(Data_Train, Gold_Train)
 
-print(rforrestscore)
 
-logicregression = LogisticRegression()
-lreg = logicregression.fit(Data_Train, Gold_Train)
-lregscore = lreg.score(Data_Train, Gold_Train)
+lreg = LogisticRegression()
+lreg_fit = lreg.fit(Data_Train, Gold_Train)
+lreg_score = lreg_fit.score(Data_Train, Gold_Train)
+lreg_pred = lreg_fit.predict(Data_Test)
+print(f1_score(Gold_Tests, lreg_pred , average="macro"))
+print(precision_score(Gold_Tests, lreg_pred , average="macro"))
+print(recall_score(Gold_Tests, lreg_pred , average="macro")) 
+print(lreg_score)
+print()
 
-print(lregscore)
+
+svc = SVC()
+svc_fit = svc.fit(Data_Train, Gold_Train)
+svc_score = svc_fit.score(Data_Train, Gold_Train)
+sfc_pred = svc_fit.predict(Data_Test)
+print(f1_score(Gold_Tests, sfc_pred , average="macro"))
+print(precision_score(Gold_Tests, sfc_pred , average="macro"))
+print(recall_score(Gold_Tests, sfc_pred , average="macro"))
+print(svc_score)
+print()
+
+
+nb = GaussianNB()
+nb_fit = nb.fit(Data_Train, Gold_Train)
+nb_score = nb_fit.score(Data_Train, Gold_Train)
+nb_pred = nb_fit.predict(Data_Test)
+print(f1_score(Gold_Tests, sfc_pred , average="macro"))
+print(precision_score(Gold_Tests, sfc_pred , average="macro"))
+print(recall_score(Gold_Tests, sfc_pred , average="macro"))
+print(nb_score)
+
 
